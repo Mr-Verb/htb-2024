@@ -209,3 +209,16 @@ done
 ```bash
 # Password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 ```
+
+### Level 13
+```bash
+ssh bandit13@bandit.labs.overthewire.org -p 2220
+# Password FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+```
+Initial thoughs:
+Use ssh to log into the localhose using the private key in order to impersonate bandit14
+```bash
+ssh bandit14@localhost -p 2220 -i sshkey.private
+cat /etc/bandit_pass/bandit14
+# Password: MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+```
