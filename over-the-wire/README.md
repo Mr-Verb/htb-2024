@@ -300,3 +300,28 @@ dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
 vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 -----END RSA PRIVATE KEY-----
 ```
+
+### Level 17
+```bash
+ssh bandit17@bandit.labs.overthewire.org -p 2220 -i sshkey.private
+# Pasword: private key from level 16
+diff passwords.new passwords.old
+# Password: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+```
+
+### Level 18
+```bash
+ssh bandit18@bandit.labs.overthewire.org -p 2220 -f "cat readme"
+# Password: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+
+# Password: cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+```
+
+### Level 19
+```bash
+ssh bandit19@bandit.labs.overthewire.org -p 2220
+# Password: cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+./bandit20-do cat /etc/bandit_pass/bandit20
+
+# Password: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+```
