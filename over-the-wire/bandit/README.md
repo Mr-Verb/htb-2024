@@ -362,4 +362,18 @@ cat attempts.txt | netcat localhost 30002
 ```bash
 ssh bandit25@bandit.labs.overthewire.org -p 2220
 # password: iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
-ssh bandit26@localhost -p 2220 -i bandit26.sshkey
+mktemp -d
+cd # temp dir
+cat /etc/passwd | grep bandit26
+cat /usr/bin/showtext
+# In CMD with a shrunken screen, more requires a small screen in order to work properly if your screen is larger than the total page size
+ssh bandit26@bandit.labs.overthewire.org -p 2220 -i bandit26.sshkey
+# press "v" to go into vim from more
+# press ":e /etc/band_pass/bandit26 to edit the bandit26 password file
+# password: s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+```
+
+### Level 26
+```bash
+ssh bandit26@bandit.labs.overthewire.org -p 2220
+# password: s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
