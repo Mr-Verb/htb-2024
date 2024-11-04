@@ -4,13 +4,14 @@ on:
   push:
     branches:
       - "environment"
-env:
-  COMMIT_SHA: $GITHUB_SHA
-  BRANCH_REF: $GITHUB_REF
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      COMMIT_SHA: $GITHUB_SHA
+      BRANCH_REF: $GITHUB_REF
     steps:
       - 
         name: Checkout
@@ -30,4 +31,4 @@ jobs:
         with:
           context: "{{defaultContext}}:environment"
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:$COMMIT_SHA,${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:$BRANCH_REF,${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:${{ env.COMMIT_SHA }},${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:${{ env.BRANCH_REF }},${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:latest
