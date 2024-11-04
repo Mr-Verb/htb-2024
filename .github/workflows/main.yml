@@ -29,4 +29,5 @@ jobs:
         with:
           context: "{{defaultContext}}:environment"
           push: true
+
           tags: ${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:${{ github.sha }},${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:${{ github.ref_name }},${{ vars.DOCKERHUB_USERNAME }}/htb-2024-csc:latest
