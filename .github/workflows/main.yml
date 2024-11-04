@@ -2,9 +2,10 @@ name: ci
 
 on:
   push:
+    paths:
+      - environment/Dockerfile
     branches:
       - "environment"
-
 
 jobs:
   build:
