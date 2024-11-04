@@ -7,7 +7,6 @@ on:
     branches:
       - "environment"
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
