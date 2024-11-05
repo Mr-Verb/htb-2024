@@ -1,2 +1,2 @@
-environment/*.sh
+environment/*-environment-*.sh
 *.private
