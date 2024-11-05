@@ -1,6 +1,6 @@
 # This image is used for the coding/dev environment for the csc
 
-# Builder Image
+# Builder Images
 FROM vanhauser/hydra:latest AS hydra
 FROM ghcr.io/oj/gobuster:latest AS gobuster
 
@@ -26,12 +26,10 @@ COPY --from=hydra /usr/local/bin/hydra $BIN_DIR/
 COPY --from=hydra /usr/local/bin/pw-inspector $BIN_DIR/
 COPY --from=gobuster /app/gobuster $BIN_DIR/
 
-# Init update and upgrade
+# Init update and upgrade && install packages
 RUN \
-    apt update && apt upgrade -y
-
-# Install packages
-RUN \
+    apt update && \
+    apt upgrade -y && \
     apt install -y \
         apt-utils \
         software-properties-common \
@@ -41,12 +39,12 @@ RUN \
         build-essential \
         john \
         nmap \
-        snapd
+        snapd \
+        wget
 
-# Install Snap pacakges
-RUN \
-    snap install -y \
-        autopsy
+# # Install Snap pacakges
+# RUN \
+#     snap install autopsy
 
 # Install Python3.12
 RUN \
@@ -54,7 +52,7 @@ RUN \
     apt update && apt install -y \
         python3.12 \
         python3-venv \
-        pip3
+        pip
 
 # Create non-root user
 RUN \
@@ -68,7 +66,7 @@ RUN \
 
 # Download Wordlists
 RUN \
-    curl -s https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt -o $WORDLIST_DIR/
+    mkdir -p $WORDLIST_DIR && cd $WORDLIST_DIR && wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
 
 # Set non-root user
 USER $UID
