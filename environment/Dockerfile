@@ -41,8 +41,7 @@ RUN \
         build-essential \
         john \
         nmap \
-        snapd \
-        kali-linux-large
+        snapd
 
 # Install Snap pacakges
 RUN \
