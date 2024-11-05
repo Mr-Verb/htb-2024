@@ -46,7 +46,7 @@ RUN \
 # RUN \
 #     snap install autopsy
 
-# Install Python3.12
+# Install Python3.12 and name-that-hash
 RUN \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt update && apt install -y \
