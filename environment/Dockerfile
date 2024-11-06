@@ -5,7 +5,7 @@ FROM vanhauser/hydra:latest AS hydra
 FROM ghcr.io/oj/gobuster:latest AS gobuster
 
 # Base image
-FROM ubuntu:24.04
+FROM kalilinux/kali-rolling:latest
 
 # Install using root user
 USER 0
@@ -13,7 +13,7 @@ USER 0
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV BIN_DIR=/usr/local/bin
-ENV WORDLIST_DIR=/htbcsc/wordlists
+ENV WORDLIST_DIR=/wordlists
 
 # Build Args not available in image
 ARG USER=htbcsc
@@ -26,13 +26,18 @@ COPY --from=hydra /usr/local/bin/hydra $BIN_DIR/
 COPY --from=hydra /usr/local/bin/pw-inspector $BIN_DIR/
 COPY --from=gobuster /app/gobuster $BIN_DIR/
 
+RUN \
+    apt update && \
+    apt -y install \
+        kali-linux-headless \
+        seclists
+
 # Init update and upgrade && install packages
 RUN \
     apt update && \
     apt upgrade -y && \
     apt install -y \
         apt-utils \
-        software-properties-common \
         curl \
         tar \
         hashcat \
@@ -42,13 +47,8 @@ RUN \
         snapd \
         wget
 
-# # Install Snap pacakges
-# RUN \
-#     snap install autopsy
-
 # Install Python3.12 and name-that-hash
 RUN \
-    add-apt-repository ppa:deadsnakes/ppa && \
     apt update && apt install -y \
         python3.12 \
         python3-venv \
