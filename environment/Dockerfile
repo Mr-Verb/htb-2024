@@ -43,7 +43,6 @@ RUN \
         hashcat \
         build-essential \
         john \
-        nmap \
         snapd \
         wget
 
