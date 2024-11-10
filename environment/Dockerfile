@@ -67,5 +67,7 @@ RUN \
 RUN \
     mkdir -p $WORDLIST_DIR && cd $WORDLIST_DIR && wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
 
+RUN \
+    chown -R $UID /usr/lib/nmap/nmap
 # Set non-root user
 USER $UID
